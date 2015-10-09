@@ -1,0 +1,7 @@
+{% if lista %}
+    {% for nome in lista %}
+    <li>{{ nome }}</li>
+    {% endfor %}
+{% else %}
+<p>Não tem lista</p>
+{% endif %}

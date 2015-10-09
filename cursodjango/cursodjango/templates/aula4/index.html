@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Título da aula 4{% endblock %}
+
+{% block content %}
+
+<p>Olá mundo!</p>
+<p>Sejam bem-vindos!</p>
+
+{% include 'aula4/opcoes.html' with lista=lista %}
+
+{% endblock %}

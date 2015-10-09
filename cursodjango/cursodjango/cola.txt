@@ -1,0 +1,169 @@
+
+settings.py
+-----------
+===============================================================================
+
+# -*- coding: utf-8 -*-
+
+===============================================================================
+
+import os.path
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+
+===============================================================================
+
+os.path.join(PROJECT_PATH, 'cursodjango.sqlite'),
+
+===============================================================================
+
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+
+===============================================================================
+
+MEDIA_URL = '/media/'
+
+===============================================================================
+
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+
+===============================================================================
+
+STATIC_URL = '/static/'
+
+===============================================================================
+
+('site', os.path.join(PROJECT_PATH, 'static')),
+
+===============================================================================
+
+os.path.join(PROJECT_PATH, 'templates'),
+
+===============================================================================
+
+# =============================================================================
+# load settings_local.py if exists
+# usado para poder forçar outra configuração num ambiente de desenvolvimento
+# com mais de 1 pessoa.
+# necessário criar arquivo settings_local.py com a nova configuração
+# =============================================================================
+try:
+    execfile(os.path.join(PROJECT_PATH, 'settings_local.py'), globals(), locals())
+except IOError:
+    pass
+
+
+
+
+
+
+urls.py
+-------
+===============================================================================
+# incluir abaixo do from existente
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+
+===============================================================================
+# incluir no final do arquivo
+# Se DEBUG for igual a True é adicionado o path /media e mostra o conteudo
+# que existe dentre desse diretorio se acessar 127.0.0.1/media
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        )
+
+urlpatterns += staticfiles_urlpatterns()
+
+# document_root - onde ira rodar
+# settings.MEDIA_ROOT - o configurado no arquivo settingd.py para a variaável MEDIA_ROOT
+# show_indexes - mostra os arquivos indexes
+
+===============================================================================
+
+
+
+
+aula3
+-----
+===============================================================================
+
+INSTALLED_APPS = (
+    'aula3',
+)
+
+===============================================================================
+
+from django.http import HttpResponse
+
+===============================================================================
+
+url(r'^aula3/$', 'aula3.views.index'),
+url(r'^aula3/(?P<id>\d+)/$', 'aula3.views.detail'),
+url(r'^aula3/(?P<username>[\w-]+)/$', 'aula3.views.detail'),
+
+===============================================================================
+
+# usado para formularios (tira a proteção da view)
+from django.views.decorators.csrf import csrf_exempt
+
+===============================================================================
+
+# retorna a url - o nome
+from django.core.urlresolvers import reverse
+
+===============================================================================
+
+    formulario = '''
+    <form action="." method="post">
+        <input type="text" name="name" maxlength="100" />
+        <button type="submit">Enviar</button>
+    </form>
+    '''
+
+===============================================================================
+
+
+aula4
+------
+
+Templates
+===============================================================================
+
+from django import template
+t = template.Template('Meu nome é {{ nome }}.')
+c = template.Context({'nome':'Fabio'})
+print t.render(c)
+
+
+
+===============================================================================
+
+Forms
+
+<form action="." method="post">
+  <p>
+    <label for="email">Nome</label>
+    <input type="text" name="first_name" id="id_first_name" />
+  </p>
+  <p>
+    <label for="email">Sobrenome</label>
+    <input type="text" name="last_name" id="id_last_name" />
+  </p>
+  <p>
+    <label for="email">Email</label>
+    <input type="text" name="email" id="id_email" />
+  </p>
+  <p>
+    <label for="email">Twitter</label>
+    <input type="text" name="twitter" id="id_twitter" />
+  </p>
+
+===============================================================================
+
+url(r'^aula6/?P<id>\d+)/$', 'detail'),
+
+===============================================================================
