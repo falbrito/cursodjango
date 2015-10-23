@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'aula6',
     'aula7',
     'aula8',
+    'aula9',
 )
 
 # A sample logging configuration. The only tangible logging

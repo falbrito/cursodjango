@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^aula7/sair/$', 'aula7.views.sair', name='aula7_sair'),    
     url(r'^aula7/view_protegida/$', 'aula7.views.view_protegida', name='aula7_view_protegida'),    
     url(r'^aula7/view_protegida2/$', 'aula7.views.view_protegida2', name='aula7_view_protegida2'),    
+
+    url(r'^aula9/$', 'aula9.views.index', name='aula9_index'),
 )
 
 if settings.DEBUG:

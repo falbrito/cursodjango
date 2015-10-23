@@ -20,7 +20,7 @@ class Contact(models.Model):
 	)
 
 	active = models.BooleanField(
-		u'Contanto ativo',
+		u'Contato ativo',
 		default=True,
 		help_text=u'Marque para definir o contato como ativo.'
 	)
@@ -32,6 +32,31 @@ class Contact(models.Model):
 		verbose_name = u'Contato'
 		verbose_name_plural = u'Contatos'
 		ordering = ['name']
+		# ordering = ['-name'] Z para A
 
 
+class Phone(models.Model):
+
+	contact = models.ForeignKey(
+		Contact,
+		verbose_name=u'Contato',
+	)
+
+	description = models.CharField(
+		u'Descrição',
+		max_length=100,
+	)
+
+	phone = models.CharField(
+		u'Telefone',
+		max_length=20,
+	)
+
+	def __unicode__(self): # retornaremos nome e telefone
+		return '%s %s' % (self.contact.name, self.phone)
+
+	class Meta:
+		verbose_name = u'Telefone'
+		verbose_name_plural = u'Telefones'
+		
 
